@@ -1,0 +1,11 @@
+PROJECT_NAME: fastapi_mongodb_demo
+FIRST_SUPERUSER: admin@localhost.com
+FIRST_SUPERUSER_PASSWORD: admin
+
+db:
+  driver: mongodb
+  host: localhost
+  port: 27017
+  database: fastapi_mongodb_demo
+  username: fastapi_mongodb_demo
+  password: fastapi_mongodb_demo

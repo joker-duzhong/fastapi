@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fastapi-mongodb-demo"
+version = "0.0.1"
+authors = [
+  { name="huaxlin", email="featureoverload@gmail.com" },
+]
+requires-python = ">=3.9"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+line_length = 88
+src_paths = ["app"]
+
+
+[tool.black]
+target-version = ["py37", "py38", "py39"]
+line-length = 88
+include = '\.pyi?$'
+
+
+[tool.flake8]
+ignore = ['E231', 'E241']
+per-file-ignores = [
+    '__init__.py:F401',
+]
+max-line-length = 88
+count = true
+extend-ignore = [
+    # Line break occurred before a binary operator (W503)
+    # https://github.com/psf/black/issues/52
+    'W503',
+    # Line too long (E501)
+    # 1. black does not format comments
+    #    https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#comments
+    # 2. long links in doc strings are an issue
+    'E501',
+    # flake8-builtins
+    # the likelihood of running into an issue when shadowing a buildin
+    # with a class attribute is very low
+    'A003',
+    # flake8-bugbear
+    # fastapi recommends to use `Depend()` as an argument default.
+    # Unfortuantely, exceptions are hardcoded in bugbear.
+    # https://github.com/PyCQA/flake8-bugbear/issues/62
+    'B008',
+    'E203',
+    'E266',
+    'E712'
+]
+
+[tool.mypy]
+plugins = [
+  "pydantic.mypy"
+]
+ignore_missing_imports = true
+show_error_codes = true
